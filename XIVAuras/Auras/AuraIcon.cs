@@ -61,7 +61,7 @@ namespace XIVAuras.Auras
             }
         }
 
-        public override void Draw(Vector2 pos, Vector2? parentSize = null, bool parentVisible = true)
+        public override void Draw(Vector2 pos, GroupOverrides groupOverrides, Vector2? parentSize = null, bool parentVisible = true)
         {
             if (!this.TriggerConfig.TriggerOptions.Any())
             {
@@ -78,7 +78,7 @@ namespace XIVAuras.Auras
             IconStyleConfig style = this.StyleConditions.GetStyle(data) ?? this.IconStyleConfig;
 
             Vector2 localPos = pos + style.Position;
-            Vector2 size = style.Size;
+            Vector2 size = groupOverrides.IconSize ?? style.Size;
 
             if (triggered || this.Preview)
             {
@@ -173,7 +173,7 @@ namespace XIVAuras.Auras
                 if (triggered || label.Preview)
                 {
                     label.SetData(data);
-                    label.Draw(localPos, size, visible);
+                    label.Draw(localPos, groupOverrides, size, visible);
                 }
             }
 

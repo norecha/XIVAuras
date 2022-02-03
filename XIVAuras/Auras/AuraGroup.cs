@@ -58,7 +58,7 @@ namespace XIVAuras.Auras
             }
         }
 
-        public override void Draw(Vector2 pos, Vector2? parentSize = null, bool parentVisible = true)
+        public override void Draw(Vector2 pos, GroupOverrides groupOverrides, Vector2? parentSize = null, bool parentVisible = true)
         {
             bool visible = this.VisibilityConfig.IsVisible(parentVisible);
             foreach (AuraListItem aura in this.AuraList.Auras)
@@ -74,7 +74,7 @@ namespace XIVAuras.Auras
 
                 if (visible || Singletons.Get<PluginManager>().IsConfigOpen())
                 {
-                    aura.Draw(pos + this.GroupConfig.Position, null, visible);
+                    aura.Draw(pos + this.GroupConfig.Position, groupOverrides.Merge(this.GroupConfig), null, visible);
                 }
             }
 

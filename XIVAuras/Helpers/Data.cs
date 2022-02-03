@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Newtonsoft.Json;
+using XIVAuras.Config;
 
 namespace XIVAuras.Helpers
 {
@@ -41,6 +44,21 @@ namespace XIVAuras.Helpers
             RecastTime = recastTime;
             RecastTimeElapsed = recastTimeElapsed;
             MaxCharges = maxCharges;
+        }
+    }
+    
+    // AuraGroup settings that applies to all children auras
+    public struct GroupOverrides
+    {
+        public Vector2? IconSize = null;
+
+        public GroupOverrides Merge(GroupConfig groupConfig)
+        {
+            if (groupConfig.IconSize.X > 0 && groupConfig.IconSize.Y > 0)
+            {
+                this.IconSize = groupConfig.IconSize;
+            }
+            return this;
         }
     }
     

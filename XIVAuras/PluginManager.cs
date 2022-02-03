@@ -84,7 +84,8 @@ namespace XIVAuras
             {
                 foreach (AuraListItem aura in this.Config.AuraList.Auras)
                 {
-                    aura.Draw((viewPortSize / 2) + this.Config.GroupConfig.Position);
+                    aura.Draw((viewPortSize / 2) + this.Config.GroupConfig.Position,
+                        new GroupOverrides().Merge(this.Config.GroupConfig));
                 }
             }
 
