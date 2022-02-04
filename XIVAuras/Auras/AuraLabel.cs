@@ -52,7 +52,7 @@ namespace XIVAuras.Auras
             }
         }
 
-        public override void Draw(Vector2 pos, GroupOverrides groupOverrides, Vector2? parentSize = null, bool parentVisible = true)
+        public override void Draw(GroupOverrides groupOverrides, Vector2? parentSize = null, bool parentVisible = true)
         {
             if (!this.VisibilityConfig.IsVisible(parentVisible) && !this.Preview)
             {
@@ -60,7 +60,7 @@ namespace XIVAuras.Auras
             }
 
             Vector2 size = parentSize.HasValue ? parentSize.Value : ImGui.GetMainViewport().Size;
-            pos = parentSize.HasValue ? pos : Vector2.Zero;
+            Vector2 pos = parentSize.HasValue ? groupOverrides.Position : Vector2.Zero;
 
             LabelStyleConfig style = this.StyleConditions.GetStyle(_data) ?? this.LabelStyleConfig;
 

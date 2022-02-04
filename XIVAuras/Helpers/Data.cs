@@ -50,15 +50,31 @@ namespace XIVAuras.Helpers
     // AuraGroup settings that applies to all children auras
     public struct GroupOverrides
     {
+        public Vector2 Position;
         public Vector2? IconSize = null;
+
+        public GroupOverrides(Vector2 position) : this()
+        {
+            this.Position = position;
+        }
 
         public GroupOverrides Merge(GroupConfig groupConfig)
         {
+            // position offsets are appended for each group.
+            this.Position += groupConfig.Position;
+
+            // icon sizes are entirely overwritten, if they exist
             if (groupConfig.IconSize.X > 0 && groupConfig.IconSize.Y > 0)
             {
                 this.IconSize = groupConfig.IconSize;
             }
             return this;
+        }
+
+        public void Unmerge(GroupConfig groupConfig)
+        {
+            // Undo the changes Merge is doing since same object is used for entire DFS.
+            this.Position -= groupConfig.Position;
         }
     }
     

@@ -82,10 +82,11 @@ namespace XIVAuras
             ImGui.SetNextWindowSize(viewPortSize);
             if (ImGui.Begin("XIVAuras_Root", this._mainWindowFlags))
             {
+                GroupOverrides groupOverrides = new GroupOverrides(viewPortSize / 2);
                 foreach (AuraListItem aura in this.Config.AuraList.Auras)
                 {
-                    aura.Draw((viewPortSize / 2) + this.Config.GroupConfig.Position,
-                        new GroupOverrides().Merge(this.Config.GroupConfig));
+                    aura.Draw(groupOverrides.Merge(this.Config.GroupConfig));
+                    groupOverrides.Unmerge(this.Config.GroupConfig);
                 }
             }
 
