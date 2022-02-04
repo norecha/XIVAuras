@@ -53,12 +53,12 @@ namespace XIVAuras.Helpers
         public Vector2 Position;
         public Vector2? IconSize = null;
 
-        public GroupOverrides(Vector2 position) : this()
+        public GroupOverrides(Vector2 position)
         {
             this.Position = position;
         }
 
-        public GroupOverrides Merge(GroupConfig groupConfig)
+        public void Merge(GroupConfig groupConfig)
         {
             // position offsets are appended for each group.
             this.Position += groupConfig.Position;
@@ -68,13 +68,6 @@ namespace XIVAuras.Helpers
             {
                 this.IconSize = groupConfig.IconSize;
             }
-            return this;
-        }
-
-        public void Unmerge(GroupConfig groupConfig)
-        {
-            // Undo the changes Merge is doing since same object is used for entire DFS.
-            this.Position -= groupConfig.Position;
         }
     }
     

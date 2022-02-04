@@ -61,6 +61,7 @@ namespace XIVAuras.Auras
         public override void Draw(GroupOverrides groupOverrides, Vector2? parentSize = null, bool parentVisible = true)
         {
             bool visible = this.VisibilityConfig.IsVisible(parentVisible);
+            groupOverrides.Merge(this.GroupConfig);
             foreach (AuraListItem aura in this.AuraList.Auras)
             {
                 if (!this.Preview && this.LastFrameWasPreview)
@@ -74,12 +75,9 @@ namespace XIVAuras.Auras
 
                 if (visible || Singletons.Get<PluginManager>().IsConfigOpen())
                 {
-                    aura.Draw(groupOverrides.Merge(this.GroupConfig), null, visible);
-                    groupOverrides.Unmerge(this.GroupConfig);
-
+                    aura.Draw(groupOverrides, null, visible);
                 }
             }
-
             this.LastFrameWasPreview = this.Preview;
         }
     }

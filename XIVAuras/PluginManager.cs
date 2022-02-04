@@ -83,10 +83,10 @@ namespace XIVAuras
             if (ImGui.Begin("XIVAuras_Root", this._mainWindowFlags))
             {
                 GroupOverrides groupOverrides = new GroupOverrides(viewPortSize / 2);
+                groupOverrides.Merge(this.Config.GroupConfig);
                 foreach (AuraListItem aura in this.Config.AuraList.Auras)
                 {
-                    aura.Draw(groupOverrides.Merge(this.Config.GroupConfig));
-                    groupOverrides.Unmerge(this.Config.GroupConfig);
+                    aura.Draw(groupOverrides);
                 }
             }
 
